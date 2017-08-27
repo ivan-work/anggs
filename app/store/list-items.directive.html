@@ -1,0 +1,32 @@
+<div>
+    <h1>Store Items:</h1>
+    <input ng-model="ctrl.filter"/>
+    <table>
+        <tr>
+            <!--<th>Image</th>-->
+            <th ng-click="ctrl.sortBy('name')">
+                <a href="javascript:">Name</a>
+                <span ng-show="ctrl.sortProp === 'name' && !ctrl.sortReverse">↓</span>
+                <span ng-show="ctrl.sortProp === 'name' && ctrl.sortReverse">↑</span>
+            </th>
+            <th>Short desc</th>
+            <th ng-click="ctrl.sortBy('suggestedPrice')">
+                <a href="javascript:">Suggested Price</a>
+                <span ng-show="ctrl.sortProp === 'suggestedPrice' && !ctrl.sortReverse">↓</span>
+                <span ng-show="ctrl.sortProp === 'suggestedPrice' && ctrl.sortReverse">↑</span>
+            </th>
+            <th>Percent Discount</th>
+            <th>Actual Price</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="(id, item) in ctrl.getItems() | filter:ctrl.filterByName | orderBy:ctrl.sortProp:ctrl.sortReverse track by item.id">
+            <!--<td><img ng-src="{{item.imgUrl}}"></td>-->
+            <td ng-bind="item.name"/>
+            <td ng-bind="item.descShort"/>
+            <td ng-bind="item.suggestedPrice"/>
+            <td ng-bind="item.percDisc"/>
+            <td ng-bind="item.actualPrice"/>
+            <td><a ui-sref="buy({id: item.id})"><button>Buy</button></a></td>
+        </tr>
+    </table>
+</div>

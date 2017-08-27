@@ -1,0 +1,53 @@
+<div>
+    <div>You are going to buy: <strong>{{ctrl.getItem().name}}</strong></div>
+    <div>Desc: {{ctrl.getItem().descShort}}</div>
+    <div>Price: ${{ctrl.getItem().actualPrice}}</div>
+    <div>Test credit card is limited to max $100 purchases</div>
+
+    <h3>Please enter your billing information:</h3>
+    <button ng-click="ctrl.fillTestData()">Fill with test data</button>
+    <form name="billingForm" novalidate ng-model-options="{debounce: 500}">
+        <div>
+            <label>Full Name:
+                <input ng-model="ctrl.form.name"
+                       required
+                       ng-pattern="/^[A-Za-z\s]+$/"
+                />
+                <span>*</span>
+            </label>
+        </div>
+        <div>
+            <label>Address:
+                <input ng-model="ctrl.form.address"/>
+                <span>*</span>
+            </label>
+        </div>
+        <div>
+            <label>E-mail:
+                <input ng-model="ctrl.form.email"
+                       required
+                       type="email"/>
+                <span>*</span>
+            </label>
+        </div>
+        <div>
+            <label>Phone number (xxx-xxx-xxxx):
+                <input ng-model="ctrl.form.phone"
+                       required
+                       maxlength="12"
+                       ng-pattern="/^\d{3}-\d{3}-\d{4}$/"/>
+                <span>*</span>
+            </label>
+        </div>
+        <div>
+            <label>Credit card number:
+                <input ng-model="ctrl.form.ccard"
+                       required
+                       maxlength="19"
+                       ng-pattern="/^\d{19}$/"/>
+                <span>*</span>
+            </label>
+        </div>
+        <button ng-click="ctrl.buyItem($event)" ng-disabled="billingForm.$pristine || billingForm.$invalid">BUY</button>
+    </form>
+</div>
